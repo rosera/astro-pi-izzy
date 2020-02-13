@@ -1,9 +1,3 @@
-
-
-
-from time import sleep
-from fractions import Fraction
-
 import ephem
 from picamera import PiCamera
 import os
@@ -14,19 +8,8 @@ l1 = "1 25544U 98067A   18030.93057008  .00011045  00000-0  17452-3 0  9997"
 l2 = "2 25544  51.6392 342.9681 0002977  45.8872  32.8379 15.54020911 97174"
 iss = ephem.readtle(name, l1, l2)
 
-# Force sensor mode 3 (the long exposure mode), set
-# the framerate to 1/6fps, the shutter speed to 6s,
-# and ISO to 800 (for maximum gain)
-cam = PiCamera(
-    resolution=(1280, 720),
-    framerate=Fraction(1, 6),
-    sensor_mode=3)
-cam.shutter_speed = 6000000
-cam.iso = 800
-# Give the camera a good long time to set gains and
-# measure AWB (you may wish to use fixed AWB instead)
-
-
+cam = PiCamera()
+cam.resolution = (1296,972) # Valid resolution for V1 camera
 iss.compute()
 
 def get_latlon():
@@ -56,9 +39,4 @@ def get_latlon():
 
 get_latlon()
 
-sleep(30)
-cam.exposure_mode = 'off'
-# Finally, capture an image with a 6s exposure. Due
-# to mode switching on the still port, this will take
-# longer than 6 seconds
-cam.capture(dir_path+"/IZ_dark.jpg")
+cam.capture(dir_path+"/gps1.jpg")
