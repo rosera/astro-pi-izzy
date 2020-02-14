@@ -143,6 +143,7 @@ def output_data(Temp, Humid, Presh, IZ_Long, IZ_Lat):
 
 def piCamera(filename):
     print ("piCamera: " + filename )
+    get_image(filename)
 
 def piSenseHat(filename):
     print ("piSenseHat: " + filename)
