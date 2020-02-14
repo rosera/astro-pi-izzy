@@ -107,8 +107,6 @@ def get_pressure():
         Presh = round(Presh, LAB_PRECISION)
         return (Presh)
 
-
-
 def get_accelerometer():
   acceleration = sense.get_accelerometer_raw()
   x = round(acceleration['x'], LAB_PRECISION)
@@ -163,10 +161,10 @@ def piSenseHat(filename):
     # print (str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," +  str(y2) + "," + str(z2) )
     # data=[str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," + str(y2) + "," + str(z2)] 
     # createCSV(filename, data)
-    createFilename(filename, str(get_temp()), str(get_humidity()), str(get_pressure()) , str(x),  str(y), str(z),  str(x2),  str(y2),  str(z2)) 
+    createCSV(filename, str(get_temp()), str(get_humidity()), str(get_pressure()) , str(x),  str(y), str(z),  str(x2),  str(y2),  str(z2)) 
 
 
-def createFilename(filename, temp, humidity, pressure, x1,  y1, z1,  x2,  y2,  z2): 
+def createCSV(filename, temp, humidity, pressure, x1,  y1, z1,  x2,  y2,  z2): 
     with open(filename, mode='w') as astro_pi:
         astro_pi = csv.writer(astro_pi, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
