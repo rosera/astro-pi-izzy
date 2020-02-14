@@ -47,8 +47,6 @@ IZ_Temp = IZ_Humid = IZ_Presh = 0.0
 IZ_Lat = 0.0
 IZ_Long = 0.0
 
-
-
 header = ['Temp', 'Humidity','Pressure', 'X', 'Y', 'Z']
 test_line1 = ['20.2','44.7','1013.0','0','0','0']
 
@@ -58,13 +56,13 @@ test_line1 = ['20.2','44.7','1013.0','0','0','0']
 def get_image(filename):
    camera.start_preview()
    iss.compute() # Get the lat/long values from ephem
-   camera = get_iss_long(camera, iss)
-   camera = get_iss_lat(camera, iss)
+   get_iss_long(iss)
+   get_iss_lat(iss)
    time.sleep(CAMERA_SLEEP)
    camera.capture(filename)
    camera.stop_preview()
 
-def get_iss_long(camera, iss):
+def get_iss_long(iss):
     
     long_value = [float(i) for i in str(iss.sublong).split(":")]
     if long_value[0] < 0:
@@ -74,10 +72,8 @@ def get_iss_long(camera, iss):
         camera.exif_tags['GPS.GPSLongitudeRef'] = "E"
 
     camera.exif_tags['GPS.GPSLongitude'] = '%d/1,%d/1,%d/10' % (long_value[0], long_value[1], long_value[2]*10)
-      
-    return camera
 
-def get_iss_lat(camera, iss):
+def get_iss_lat(iss):
     lat_value = [float(i) for i in str(iss.sublat).split(":")]
     if lat_value[0] < 0:
         lat_value[0] = abs(lat_value[0])
@@ -86,7 +82,6 @@ def get_iss_lat(camera, iss):
         cam.exif_tags['GPS.GPSLatitudeRef'] = "N"
     cam.exif_tags['GPS.GPSLatitude'] = '%d/1,%d/1,%d/10' % (lat_value[0], lat_value[1], lat_value[2]*10)
  
-    return (camera)
 
 ################
 # SENSE HAT
