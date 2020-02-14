@@ -204,7 +204,7 @@ imageCaptureDelay = getTimeDifference(timeLaunched, LAB_IMAGE_DELAY)
 # Perform Lab tasks
 while True:
   try:
-    logger.info("{} iteration {}".format(datetime.now(), index))
+    logger.info("{} iteration {}".format(datatime.datetime.now(), index))
 
     # Save the current time
     timeNow = datetime.datetime.now()
