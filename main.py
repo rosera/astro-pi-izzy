@@ -16,9 +16,8 @@ sense = SenseHat()
 sense.clear()
 
 # Pi Camera
-# camera = PiCamera
-# camera.resolution(1920, 1080)
-# camera.start_preview()
+camera = PiCamera
+camera.resolution(1296, 972)
 
 
 ## PROD
