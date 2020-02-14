@@ -155,8 +155,9 @@ def piSenseHat(filename):
 def createCSV(filename, data):
     with open(filename, mode='w') as astro_pi:
         astro_pi = csv.writer(astro_pi, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-       
-        astro_pi.writerow(header);
+
+# Only write header during testing - to confirm data
+#        astro_pi.writerow(header);
         astro_pi.writerow(test_line1);
 
 
