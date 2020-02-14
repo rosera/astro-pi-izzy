@@ -160,19 +160,20 @@ def piSenseHat(filename):
     x, y, z = get_accelerometer()
     x2, y2, z2 = get_magfield_data()
 
-    print (str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," +  str(y2) + "," + str(z2) )
-    data=[str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," + str(y2) + "," + str(z2)] 
-    createCSV(filename, data)
+    # print (str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," +  str(y2) + "," + str(z2) )
+    # data=[str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," + str(y2) + "," + str(z2)] 
+    # createCSV(filename, data)
+    createFilename(filename, str(get_temp()), str(get_humidity()), str(get_pressure()) , str(x),  str(y), str(z),  str(x2),  str(y2),  str(z2)) 
 
 
-def createCSV(filename, data):
+def createFilename(filename, temp, humidity, pressure, x1,  y1, z1,  x2,  y2,  z2): 
     with open(filename, mode='w') as astro_pi:
-        #astro_pi = csv.writer(astro_pi, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        astro_pi = csv.writer(astro_pi, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+        astro_pi = csv.writer(astro_pi, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
 # Only write header during testing - to confirm data
 #        astro_pi.writerow(header);
-        astro_pi.writerow(data);
+#        astro_pi.writerow(data);
+        astro_pi.writerow([temp, humidity, pressure, x1, y1, z1, x2, y2, z2]);
 
 
 # Name: createFilename
