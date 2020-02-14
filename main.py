@@ -161,7 +161,7 @@ def piSenseHat(filename):
     x2, y2, z2 = get_magfield_data()
 
     print (str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," +  str(y2) + "," + str(z2) )
-    data=[str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," + str(y2) + "," + str(z2) ]
+    data=str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," + str(y2) + "," + str(z2) 
     createCSV(filename, data)
 
 
