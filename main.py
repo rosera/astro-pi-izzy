@@ -10,6 +10,7 @@ from ephem import readtle
 import datetime
 from sense_hat import SenseHat
 from picamera import PiCamera
+from logzero import logger, logfile
 
 # Sense Hat 
 sense = SenseHat()
@@ -33,6 +34,7 @@ CAMERA_SLEEP = 5
 
 # STATIC
 DIR_PATH=os.path.dirname(os.path.realpath(__file__))
+logfile(DIR_PATH + "/astro-pi-exceptions.log")
 
 station_name = "ISS (ZARYA)"
 IZ_line1 = "1 25544U 98067A   20039.12879017  .00000424  00000-0  15820-4 0  9999"
@@ -201,32 +203,35 @@ imageCaptureDelay = getTimeDifference(timeLaunched, LAB_IMAGE_DELAY)
 
 # Perform Lab tasks
 while True:
+  try:
+    logger.info("{} iteration {}".format(datetime.now(), index))
 
-  # Save the current time
-  timeNow = datetime.datetime.now()
+    # Save the current time
+    timeNow = datetime.datetime.now()
 
-  # Get a unique filename
-  filename = createFilename(index)
+    # Get a unique filename
+    filename = createFilename(index)
   
-  # Call Gather SenseHat data
-  piSenseHat(DIR_PATH + "/" + filename + TXT_EXT)
+    # Call Gather SenseHat data
+    piSenseHat(DIR_PATH + "/" + filename + TXT_EXT)
 
-  if (timeNow >= imageCaptureDelay):
-    # Call to capture image
-    piCamera(DIR_PATH + "/" + filename + IMG_EXT)
+    if (timeNow >= imageCaptureDelay):
+      # Call to capture image
+      piCamera(DIR_PATH + "/" + filename + IMG_EXT)
 
-    # Reset the camera delay - based on current time
-    imageCaptureDelay = getTimeDifference(timeNow, LAB_IMAGE_DELAY)
+      # Reset the camera delay - based on current time
+      imageCaptureDelay = getTimeDifference(timeNow, LAB_IMAGE_DELAY)
 
-  # Index filenames
-  index = index + 1
+    # Index filenames
+    index = index + 1
 
-  # Check Lab duration 
-  if (timeNow >= timeCompletion):
-    break
+    # Check Lab duration 
+    if (timeNow >= timeCompletion):
+      break
 
-  # Pause the lab
-  time.sleep(LAB_SLEEP)
-  # getDebug()
-
+    # Pause the lab
+    time.sleep(LAB_SLEEP)
+    # getDebug()
+  except Exception as ex:
+      logger.error('{}: {})'.format(e.__class__.__name__, e))
 
