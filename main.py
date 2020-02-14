@@ -6,7 +6,7 @@ import os
 import csv
 import sys
 import time
-import ephem
+from ephem import readtle 
 import datetime
 from sense_hat import SenseHat
 from picamera import PiCamera
