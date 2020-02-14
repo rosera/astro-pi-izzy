@@ -2,13 +2,14 @@
 # Date: Jan 2020
 # Description: Astro Pi Competition
 
+import os
 import csv
 import sys
 import time
 import ephem
 import datetime
 from sense_hat import SenseHat
-#from picamera import PiCamera
+from picamera import PiCamera
 
 # Sense Hat 
 sense = SenseHat()
@@ -19,21 +20,26 @@ sense.clear()
 # camera.resolution(1920, 1080)
 # camera.start_preview()
 
-# Variables
+
 ## PROD
 #LAB_MAX_DURATION = (60 * 3)
 #LAB_SLEEP = 30
 #LAB_IMAGE_DELAY = 5
+CAMERA_SLEEP = 5
 
 ## TEST
 LAB_MAX_DURATION = 2
 LAB_SLEEP = 2
 LAB_IMAGE_DELAY = 1
+
+# STATIC
+DIR_PATH=os.path.dirname(os.path.realpath(__file__))
+
 IZ_line1 = "1 25544U 98067A   20039.12879017  .00000424  00000-0  15820-4 0  9999"
 IZ_line2 = "2 25544  51.6447 271.9826 0004963 240.2524 269.3653 15.49145717211850"
 station_name = "ISS (ZARYA)"
 
-LAB_PRECISION = 2
+LAB_PRECISION = 4 
 FILENAME="astro_pi"
 TXT_EXT=".txt"
 IMG_EXT=".jpg"
@@ -43,18 +49,19 @@ IZ_Lat = 0.0
 IZ_Long = 0.0
 
 
+
 header = ['Temp', 'Humidity','Pressure', 'X', 'Y', 'Z']
 test_line1 = ['20.2','44.7','1013.0','0','0','0']
 
 ################
 # PI CAMERA
 
-def get_Image(filename):
+def get_image(filename):
    camera.start_preview()
    iss.compute() # Get the lat/long values from ephem
-   camera = get_iss_long(camerai, iss)
+   camera = get_iss_long(camera, iss)
    camera = get_iss_lat(camera, iss)
-   time.sleep(5)
+   time.sleep(CAMERA_SLEEP)
    camera.capture(filename)
    camera.stop_preview()
 
@@ -205,11 +212,11 @@ while True:
   filename = createFilename(index)
   
   # Call Gather SenseHat data
-  piSenseHat(filename + TXT_EXT)
+  piSenseHat(DIR_PATH + "\" + filename + TXT_EXT)
 
   if (timeNow >= imageCaptureDelay):
     # Call to capture image
-    piCamera(filename + IMG_EXT)
+    piCamera(DIR_PATH + "\" + filename + IMG_EXT)
 
     # Reset the camera delay - based on current time
     imageCaptureDelay = getTimeDifference(timeNow, LAB_IMAGE_DELAY)
