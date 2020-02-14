@@ -34,9 +34,10 @@ LAB_IMAGE_DELAY = 1
 # STATIC
 DIR_PATH=os.path.dirname(os.path.realpath(__file__))
 
+station_name = "ISS (ZARYA)"
 IZ_line1 = "1 25544U 98067A   20039.12879017  .00000424  00000-0  15820-4 0  9999"
 IZ_line2 = "2 25544  51.6447 271.9826 0004963 240.2524 269.3653 15.49145717211850"
-station_name = "ISS (ZARYA)"
+iss = readtle(station_name, IZ_line1, IZ_line2)
 
 LAB_PRECISION = 4 
 FILENAME="astro_pi"
