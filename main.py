@@ -21,15 +21,15 @@ camera.resolution = (1296, 972)
 
 
 ## PROD
-#LAB_MAX_DURATION = (60 * 3)
-#LAB_SLEEP = 30
-#LAB_IMAGE_DELAY = 5
+LAB_MAX_DURATION = (60 * 3)
+LAB_SLEEP = 30
+LAB_IMAGE_DELAY = 5
 CAMERA_SLEEP = 5
 
 ## TEST
-LAB_MAX_DURATION = 2
-LAB_SLEEP = 2
-LAB_IMAGE_DELAY = 1
+#LAB_MAX_DURATION = 2
+#LAB_SLEEP = 2
+#LAB_IMAGE_DELAY = 1
 
 # STATIC
 DIR_PATH=os.path.dirname(os.path.realpath(__file__))
@@ -40,7 +40,7 @@ IZ_line2 = "2 25544  51.6447 271.9826 0004963 240.2524 269.3653 15.4914571721185
 iss = readtle(station_name, IZ_line1, IZ_line2)
 
 LAB_PRECISION = 4 
-FILENAME="astro_pi"
+FILENAME="astro-pi"
 TXT_EXT=".txt"
 IMG_EXT=".jpg"
 index = 0
@@ -226,6 +226,6 @@ while True:
 
   # Pause the lab
   time.sleep(LAB_SLEEP)
-  getDebug()
+  # getDebug()
 
 
