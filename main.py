@@ -78,10 +78,10 @@ def get_iss_lat(iss):
     lat_value = [float(i) for i in str(iss.sublat).split(":")]
     if lat_value[0] < 0:
         lat_value[0] = abs(lat_value[0])
-        cam.exif_tags['GPS.GPSLatitudeRef'] = "S"
+        camera.exif_tags['GPS.GPSLatitudeRef'] = "S"
     else:
-        cam.exif_tags['GPS.GPSLatitudeRef'] = "N"
-    cam.exif_tags['GPS.GPSLatitude'] = '%d/1,%d/1,%d/10' % (lat_value[0], lat_value[1], lat_value[2]*10)
+        camera.exif_tags['GPS.GPSLatitudeRef'] = "N"
+    camera.exif_tags['GPS.GPSLatitude'] = '%d/1,%d/1,%d/10' % (lat_value[0], lat_value[1], lat_value[2]*10)
  
 
 ################
