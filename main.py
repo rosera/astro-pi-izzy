@@ -151,7 +151,7 @@ def piCamera(filename):
     get_image(filename)
 
 def piSenseHat(filename):
-    print ("piSenseHat: " + filename)
+    # print ("piSenseHat: " + filename)
     temp = get_temp()
     humidity = get_humidity()
     pressure = get_pressure()
