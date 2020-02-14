@@ -17,7 +17,7 @@ sense.clear()
 
 # Pi Camera
 camera = PiCamera
-camera.resolution(1296, 972)
+camera.resolution = (1296, 972)
 
 
 ## PROD
