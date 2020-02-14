@@ -119,9 +119,12 @@ def get_accelerometer():
 
 def get_magfield_data():
 
-    Earth_magfld = round(sense.get_compass_raw(), LAB_PRECISION)
+  magfld = sense.get_compass_raw()
+  x = round(magfld['x'], LAB_PRECISION)
+  y = round(magfld['y'], LAB_PRECISION)
+  z = round(magfld['z'], LAB_PRECISION)
 
-    return (Earth_magfld)
+  return x, y, z
 
 
 # Format
@@ -155,10 +158,10 @@ def piSenseHat(filename):
     humidity = get_humidity()
     pressure = get_pressure()
     x, y, z = get_accelerometer()
-    magfield = get_magfield_data()
+    x2, y2, z2 = get_magfield_data()
 
-    print (str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(magfield) )
-    data=[str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(magfield)]
+    print (str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," +  str(y2) + "," + str(z2) )
+    data=[str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," + str(y2) + "," + str(z2) ]
     createCSV(filename, data)
 
 
