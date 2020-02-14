@@ -161,13 +161,14 @@ def piSenseHat(filename):
     x2, y2, z2 = get_magfield_data()
 
     print (str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," +  str(y2) + "," + str(z2) )
-    data=str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," + str(y2) + "," + str(z2) 
+    data=[str(get_temp()) + "," + str(get_humidity()) + "," + str(get_pressure()) + "," + str(x) + "," + str(y) + "," + str(z) + "," + str(x2) + "," + str(y2) + "," + str(z2)] 
     createCSV(filename, data)
 
 
 def createCSV(filename, data):
     with open(filename, mode='w') as astro_pi:
-        astro_pi = csv.writer(astro_pi, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        #astro_pi = csv.writer(astro_pi, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        astro_pi = csv.writer(astro_pi, delimiter=',', quoting=csv.QUOTE_MINIMAL)
 
 # Only write header during testing - to confirm data
 #        astro_pi.writerow(header);
