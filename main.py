@@ -212,11 +212,11 @@ while True:
   filename = createFilename(index)
   
   # Call Gather SenseHat data
-  piSenseHat(DIR_PATH + "\" + filename + TXT_EXT)
+  piSenseHat(DIR_PATH + "/" + filename + TXT_EXT)
 
   if (timeNow >= imageCaptureDelay):
     # Call to capture image
-    piCamera(DIR_PATH + "\" + filename + IMG_EXT)
+    piCamera(DIR_PATH + "/" + filename + IMG_EXT)
 
     # Reset the camera delay - based on current time
     imageCaptureDelay = getTimeDifference(timeNow, LAB_IMAGE_DELAY)
