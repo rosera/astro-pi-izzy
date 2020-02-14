@@ -50,15 +50,37 @@ test_line1 = ['20.2','44.7','1013.0','0','0','0']
 # PI CAMERA
 
 def get_Image(filename):
-   print("Taking a picture")
-   # Capture(filename)
+   camera.start_preview()
+   iss.compute() # Get the lat/long values from ephem
+   camera = get_iss_long(camerai, iss)
+   camera = get_iss_lat(camera, iss)
+   time.sleep(5)
+   camera.capture(filename)
+   camera.stop_preview()
 
-def tag_Image():
-    # Call get iss long
-    # Call get iss lat
-    # Use EXIF to tag the Image with coordinates
+def get_iss_long(camera, iss):
+    
+    long_value = [float(i) for i in str(iss.sublong).split(":")]
+    if long_value[0] < 0:
+        long_value[0] = abs(long_value[0])
+        camera.exif_tags['GPS.GPSLongitudeRef'] = "W"
+    else:
+        camera.exif_tags['GPS.GPSLongitudeRef'] = "E"
 
+    camera.exif_tags['GPS.GPSLongitude'] = '%d/1,%d/1,%d/10' % (long_value[0], long_value[1], long_value[2]*10)
+      
+    return camera
 
+def get_iss_lat(camera, iss):
+    lat_value = [float(i) for i in str(iss.sublat).split(":")]
+    if lat_value[0] < 0:
+        lat_value[0] = abs(lat_value[0])
+        cam.exif_tags['GPS.GPSLatitudeRef'] = "S"
+    else:
+        cam.exif_tags['GPS.GPSLatitudeRef'] = "N"
+    cam.exif_tags['GPS.GPSLatitude'] = '%d/1,%d/1,%d/10' % (lat_value[0], lat_value[1], lat_value[2]*10)
+ 
+    return (camera)
 
 ################
 # SENSE HAT
@@ -81,25 +103,6 @@ def get_pressure():
         Presh = round(Presh, LAB_PRECISION)
         return (Presh)
 
-def get_iss_long(station_name, IZ_Long, IZ_line1, IZ_line2):
-    
-    l1 = IZ_line1
-    l2 = IZ_line2
-    iss = ephem.readtle(station_name, l1, l2)
-
-    iss.compute()
-    long_value = [float(i) for i in str(iss.sublong).split(":")]
-    return (long_value)
-
-def get_iss_lat(station_name, IZ_Lat, IZ_line1, IZ_line2):
-
-    l1 = IZ_line1
-    l2 = IZ_line2
-    iss = ephem.readtle(station_name, l1, l2)
-
-    iss.compute()
-    lat_value = [float(i) for i in str(iss.sublat).split(":")]
-    return (lat_value)
 
 
 def get_accelerometer():
