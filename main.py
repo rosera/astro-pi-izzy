@@ -233,5 +233,5 @@ while True:
     time.sleep(LAB_SLEEP)
     # getDebug()
   except Exception as ex:
-      logger.error('{}: {})'.format(e.__class__.__name__, e))
+      logger.error('{}: {})'.format(e.__class__.__name__, ex))
 
