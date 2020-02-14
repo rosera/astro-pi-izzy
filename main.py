@@ -119,7 +119,7 @@ def get_accelerometer():
 
 def get_magfield_data():
 
-    Earth_magfld = round(sense.get_compass_raw(, LAB_PRECISION)
+    Earth_magfld = round(sense.get_compass_raw(), LAB_PRECISION)
 
     return (Earth_magfld)
 
