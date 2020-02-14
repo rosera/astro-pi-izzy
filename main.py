@@ -16,7 +16,7 @@ sense = SenseHat()
 sense.clear()
 
 # Pi Camera
-camera = PiCamera
+camera = PiCamera()
 camera.resolution = (1296, 972)
 
 
